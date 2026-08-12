@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "What should I do during a hurricane?",
+        "expected_source": "cyclone_guidelines.pdf"
+    },
+    {
+        "id": 2,
+        "question": "What should I do if I am indoors during an earthquake?",
+        "expected_source": "earthquake_guidelines.pdf"
+    },
+    {
+        "id": 3,
+        "question": "What should I do when there is a flood warning?",
+        "expected_source": "flood_guidelines.pdf"
+    },
+    {
+        "id": 4,
+        "question": "What should I do if I am outdoors during an earthquake?",
+        "expected_source": "earthquake_guidelines.pdf"
+    },
+    {
+        "id": 5,
+        "question": "How should I stay safe from flooding?",
+        "expected_source": "flood_guidelines.pdf"
+    },
+    {
+        "id": 6,
+        "question": "What should I do after an earthquake?",
+        "expected_source": "earthquake_guidelines.pdf"
+    },
+    {
+        "id": 7,
+        "question": "What should I do after a hurricane?",
+        "expected_source": "cyclone_guidelines.pdf"
+    },
+    {
+        "id": 8,
+        "question": "What is the capital of France?",
+        "expected_source": null
+    },
+    {
+        "id": 9,
+        "question": "What is Python?",
+        "expected_source": null
+    },
+    {
+        "id": 10,
+        "question": "How should I prepare for a flood?",
+        "expected_source": "flood_guidelines.pdf"
+    }
+]
