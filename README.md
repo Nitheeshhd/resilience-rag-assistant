@@ -1,446 +1,312 @@
-#  Resilience RAG Assistant
+# Resilience RAG Assistant
 
-A Streamlit-based **Disaster Management Retrieval-Augmented Generation (RAG) Assistant** that answers questions using information retrieved from the provided **cyclone, earthquake, and flood guideline documents**.
+A document-grounded disaster-management question-answering application built using **Retrieval-Augmented Generation (RAG)**.
 
-The system combines:
+The application retrieves relevant information from provided **Cyclone/Hurricane, Earthquake, and Flood guideline documents** and uses the retrieved content as context for generating answers through an OpenRouter-hosted LLM.
 
-* **PDF document processing**
-* **Text chunking**
-* **Sentence Transformers**
-* **FAISS vector similarity search**
-* **OpenRouter LLM**
-* **Retrieval-Augmented Generation**
-* **Source attribution**
-* **Similarity threshold filtering**
-* **Streamlit web interface**
-
-The main goal is to provide answers that are **grounded in the provided disaster-management documents rather than relying on unsupported external information**.
+The system also displays the retrieved source document, page number, and similarity score to provide transparency about where the answer comes from.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
-The Resilience RAG Assistant allows a user to ask questions such as:
+The **Resilience RAG Assistant** is designed to answer disaster-preparedness questions using only the information available in the provided disaster-management documents.
 
-* What should I do during a hurricane?
-* What should I do during an earthquake?
-* What should I do when there is a flood warning?
+Instead of directly asking a language model to answer a question, the system first searches the document knowledge base for relevant information.
 
-The application searches the provided disaster-management documents for relevant information and then passes the retrieved content to an LLM.
+The retrieved information is then provided to the language model as context.
 
-The generated answer is therefore based on the retrieved document context.
-
-If the user's question is unrelated to the available documents, the system does not generate an unsupported answer.
-
-For example:
-
-> **Question:** What is the capital of France?
-
-The application responds:
-
-> The information is not available in the provided documents.
-
----
-
-# 🧠 What is RAG?
-
-**RAG stands for Retrieval-Augmented Generation.**
-
-Instead of allowing an LLM to answer a question entirely from its pretrained knowledge, the system first retrieves relevant information from a specific knowledge base.
-
-The process is:
+### Core workflow
 
 ```text
+Disaster PDF Documents
+        |
+        v
+Document Loading
+        |
+        v
+Text Chunking
+        |
+        v
+Sentence Embeddings
+        |
+        v
+FAISS Vector Store
+        |
+        v
 User Question
-      ↓
+        |
+        v
 Question Embedding
-      ↓
-FAISS Similarity Search
-      ↓
-Relevant Document Chunks
-      ↓
+        |
+        v
+Similarity Search
+        |
+        v
+Top-K Relevant Chunks
+        |
+        v
 Similarity Threshold Filtering
-      ↓
+        |
+        v
 Retrieved Context
-      ↓
+        |
+        v
 OpenRouter LLM
-      ↓
+        |
+        v
 Grounded Answer
-      ↓
+        |
+        v
 Source Attribution
-```
+Key Features
+Document-grounded disaster-management question answering
+Cyclone / Hurricane guidance
+Earthquake safety guidance
+Flood safety guidance
+PDF text extraction using pypdf
+Text chunking for improved retrieval
+Semantic embeddings using all-MiniLM-L6-v2
+FAISS vector similarity search
+Cosine-similarity-based retrieval
+Top-3 relevant chunk retrieval
+Similarity threshold filtering
+OpenRouter LLM integration
+Source document attribution
+Page number display
+Similarity score display
+Out-of-scope question handling
+Streamlit web interface
+Automated evaluation script
+Evaluation result storage in JSON format
+Knowledge Base
 
-This approach helps the application keep its answers connected to the provided documents.
+The current knowledge base contains three disaster-management guideline documents:
 
----
+data/documents/
 
-# 🏗️ System Architecture
+├── cyclone_guidelines.pdf
+├── earthquake_guidelines.pdf
+└── flood_guidelines.pdf
 
-```text
-                 ┌─────────────────────┐
-                 │     User Question   │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │     Streamlit UI    │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Sentence Transformer│
-                 │ all-MiniLM-L6-v2    │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   Query Embedding   │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   FAISS Search      │
-                 │ Cosine Similarity   │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Similarity Threshold│
-                 │       0.30          │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Relevant Chunks     │
-                 │      Top 3          │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Context Construction│
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   OpenRouter LLM    │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │    Final Answer     │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Source Attribution  │
-                 │ PDF + Page + Score  │
-                 └─────────────────────┘
-```
+The current document collection contains:
 
----
+13 document pages
+41 searchable text chunks
 
-# 📚 Knowledge Base
+The chunks retain metadata such as:
 
-The application currently uses three disaster-management PDF documents:
+Source document
+Page number
+Extracted text
+Technologies Used
+Technology	Purpose
+Python	Core application development
+Streamlit	Web-based user interface
+pypdf	PDF text extraction
+Sentence Transformers	Text embedding generation
+all-MiniLM-L6-v2	Sentence embedding model
+FAISS	Vector similarity search
+NumPy	Numerical and embedding operations
+OpenAI Python SDK	API client for OpenRouter
+OpenRouter	LLM access
+python-dotenv	Environment variable management
+JSON	Metadata and evaluation result storage
+Why These Technologies Are Used
+Python
 
-### 🌪️ Cyclone / Hurricane
+Python is used as the main programming language because it provides libraries for document processing, embeddings, vector search, API integration, and application development.
 
-Contains guidance related to:
+Streamlit
 
-* Safe shelter
-* Emergency communication
-* Evacuation
-* Severe wind safety
-* Floodwater safety
-* Generator safety
-* Emergency preparedness
+Streamlit provides a simple interactive web interface for users to ask disaster-management questions without directly interacting with the command line.
 
-### 🌎 Earthquake
+pypdf
 
-Contains guidance related to:
+pypdf is used to extract text from the provided PDF documents page by page.
 
-* Indoor earthquake safety
-* Outdoor earthquake safety
-* Vehicle safety
-* Protection from falling objects
-* Being trapped under debris
-* Actions after shaking
-* Family preparedness
+Each extracted page is stored together with its source filename and page number.
 
-### 🌊 Flood
+Sentence Transformers
 
-Contains guidance related to:
+Sentence Transformers are used to convert document chunks and user questions into numerical vector representations.
 
-* Flood warnings
-* Evacuation
-* Moving to higher ground
-* Floodwater safety
-* Communication
-* Flood preparation
-* Post-flood actions
+The project uses:
 
----
-
-# 🔧 Technologies Used
-
-| Technology            | Purpose                                |
-| --------------------- | -------------------------------------- |
-| Python                | Main programming language              |
-| Streamlit             | Web application and user interface     |
-| PyMuPDF               | PDF document text extraction           |
-| Sentence Transformers | Convert text into numerical embeddings |
-| `all-MiniLM-L6-v2`    | Sentence embedding model               |
-| FAISS                 | Vector similarity search               |
-| NumPy                 | Numerical/vector operations            |
-| OpenRouter            | LLM API                                |
-| OpenAI Python SDK     | Communication with OpenRouter          |
-| python-dotenv         | Loading API keys from `.env`           |
-
----
-
-# 🔍 Why Each Technology Is Used
-
-## 1. Python
-
-Python is used as the main programming language because it provides libraries for:
-
-* Document processing
-* Machine learning
-* Embeddings
-* Vector search
-* API integration
-* Web application development
-
----
-
-## 2. Streamlit
-
-Streamlit is used to create the user interface.
-
-It provides:
-
-* Question input
-* Ask Question button
-* Answer display
-* Source display
-* Disaster information cards
-* System architecture information
-* Safety disclaimer
-
-This allows the RAG system to be demonstrated through a web interface rather than only through the terminal.
-
----
-
-## 3. PDF Processing
-
-The disaster guidelines are provided as PDF documents.
-
-The document loader extracts text from these PDFs so that the content can be processed by the RAG pipeline.
-
-The extracted information contains metadata such as:
-
-```text
-Source
-Page
-Text
-```
-
-This metadata is later used for source attribution.
-
----
-
-## 4. Text Chunking
-
-Large documents are divided into smaller text chunks.
-
-Instead of embedding an entire PDF as one large piece of text, the application creates smaller searchable sections.
-
-This makes it easier to retrieve the specific part of a document that is relevant to a user's question.
-
-The project currently creates **41 chunks** from the provided documents.
-
----
-
-## 5. Sentence Transformers
-
-The project uses the embedding model:
-
-```text
 all-MiniLM-L6-v2
-```
 
-The model converts text into numerical vectors.
+The model generates 384-dimensional embeddings.
 
-For example:
+FAISS
 
-```text
-"What should I do during a hurricane?"
-```
+FAISS is used as the vector search engine.
 
-is converted into a vector representation.
+The project uses:
 
-The same process is applied to the document chunks.
+IndexFlatIP
 
-This allows the system to compare the semantic meaning of the question with the semantic meaning of the document chunks.
+The embeddings are normalized before indexing.
 
----
+Because the vectors are normalized, inner-product similarity behaves as cosine similarity.
 
-## 6. FAISS
+OpenRouter
 
-FAISS is used as the vector database/search engine.
+OpenRouter is used to provide access to the language model.
 
-The project uses an inner-product index with normalized embeddings.
+The retrieved document context is sent to the LLM together with the user's question.
 
-Because the embeddings are normalized, inner product behaves as cosine similarity for the retrieval process.
+python-dotenv
 
-The vector store contains:
+python-dotenv loads the OpenRouter API key from the local .env file.
 
-```text
+The .env file is excluded from Git using .gitignore.
+
+RAG Pipeline
+1. Document Loading
+
+The system loads all PDF files from:
+
+data/documents/
+
+Each page containing text is converted into a document record containing:
+
+text
+source
+page
+2. Text Chunking
+
+The extracted document text is divided into smaller chunks.
+
+Chunking allows the system to retrieve specific relevant sections rather than searching an entire document as one large unit.
+
+Each chunk maintains its source and page metadata.
+
+3. Embedding Generation
+
+Each text chunk is converted into a vector using:
+
+all-MiniLM-L6-v2
+
+The same embedding model is used for user questions.
+
+This allows document chunks and questions to be compared in the same vector space.
+
+4. FAISS Indexing
+
+The generated embeddings are normalized and stored in a FAISS index.
+
+The current vector store contains:
+
 41 vectors
-```
 
 with an embedding dimension of:
 
-```text
 384
-```
 
-FAISS then retrieves the most relevant chunks for a user's question.
+The vector store is stored in:
 
----
+data/vector_store/
 
-## 7. Similarity Threshold
+with:
 
-The application uses:
+disaster_guidelines.index
+chunks.json
+5. Question Retrieval
 
-```text
-MIN_SIMILARITY = 0.30
-```
+When the user asks a question:
 
-This threshold helps prevent weakly related document chunks from being treated as relevant evidence.
+The question is converted into an embedding.
+The query embedding is normalized.
+FAISS searches for the most similar document chunks.
+The top 3 results are retrieved.
+Results below the similarity threshold are removed.
 
-If a retrieved result has a similarity score below the threshold, it is ignored.
+The configured similarity threshold is:
 
-For example, an unrelated question such as:
+0.30
+6. Context Construction
 
-```text
+The relevant retrieved chunks are combined into a context containing:
+
+Source document
+Page number
+Retrieved text
+
+This context is then passed to the language model.
+
+7. Grounded Generation
+
+The LLM receives:
+
+The user's question
+Retrieved document context
+Grounding instructions
+
+The system prompt instructs the LLM to:
+
+Use only the retrieved context.
+Avoid inventing facts.
+Avoid outside knowledge.
+Answer only from the provided documents.
+State when the required information is unavailable.
+Out-of-Scope Handling
+
+The system is designed to avoid intentionally answering questions that are unrelated to the knowledge base.
+
+For example:
+
 What is the capital of France?
-```
 
-does not retrieve sufficiently relevant disaster-management information.
+If no relevant document information passes the similarity threshold, the system returns:
 
-The system therefore returns:
-
-```text
 The information is not available in the provided documents.
-```
 
----
+This helps reduce unsupported answers and keeps the system focused on the provided disaster-management documents.
 
-## 8. OpenRouter
+User Interface
 
-OpenRouter is used to provide access to the LLM used for answer generation.
+The application is built using Streamlit.
 
-The application sends:
+The interface provides:
 
-```text
-User Question
-+
-Retrieved Document Context
-```
+Disaster Information Cards
 
-to the LLM.
+The UI displays information cards for:
 
-The model is instructed to answer only from the retrieved context.
+Cyclone / Hurricane
+Earthquake
+Flood
+Question Input
 
-The configured model is:
-
-```text
-openrouter/free
-```
-
----
-
-## 9. Prompt Grounding
-
-The RAG pipeline uses a system prompt that instructs the LLM to:
-
-1. Use only the retrieved document context.
-2. Avoid inventing information.
-3. Avoid outside knowledge.
-4. Return a fixed response when the information is unavailable.
-5. Provide clear and practical answers.
-6. Use numbered or bullet-point formatting when appropriate.
-
-This is an important part of preventing unsupported answers.
-
----
-
-# 📊 Retrieval Process
-
-For every question, the system performs the following steps:
-
-### Step 1 — Receive the question
+Users can enter a disaster-management question through the text input area.
 
 Example:
 
-```text
-What should I do during an earthquake?
-```
+What should I do during a hurricane?
+Generated Answer
 
-### Step 2 — Create an embedding
+The system displays the answer generated using the retrieved document context.
 
-The question is converted into a 384-dimensional vector using:
+Retrieved Sources
 
-```text
-all-MiniLM-L6-v2
-```
+For each retrieved source, the application displays:
 
-### Step 3 — Search FAISS
-
-The question vector is compared against the stored document vectors.
-
-### Step 4 — Retrieve Top 3
-
-The system retrieves the three highest-scoring chunks.
-
-### Step 5 — Apply similarity threshold
-
-Results below:
-
-```text
-0.30
-```
-
-are removed.
-
-### Step 6 — Build context
-
-The remaining chunks are combined into the context supplied to the LLM.
-
-### Step 7 — Generate answer
-
-OpenRouter generates an answer using only the retrieved context.
-
-### Step 8 — Display sources
-
-The UI displays:
-
-```text
-Source PDF
+Source document
 Page number
 Similarity score
-```
 
-This provides transparency about where the answer came from.
+Example:
 
----
+cyclone_guidelines.pdf
+Page: 2
+Similarity: 0.7357
+Safety Disclaimer
 
-# 📁 Project Structure
+The application includes a disclaimer explaining that it is an information and demonstration tool and should not replace instructions from local emergency authorities during an actual disaster.
 
-```text
-RESILIENCE-RAG-ASSISTANT/
-│
+Project Structure
+resilience-rag-assistant/
+|
 ├── data/
 │   ├── documents/
 │   │   ├── cyclone_guidelines.pdf
@@ -450,16 +316,18 @@ RESILIENCE-RAG-ASSISTANT/
 │   └── vector_store/
 │       ├── chunks.json
 │       └── disaster_guidelines.index
-│
+|
 ├── evaluation/
-│   └── sample_questions.json
-│
+│   ├── sample_questions.json
+│   ├── run_evaluation.py
+│   └── evaluation_results.json
+|
 ├── screenshots/
 │   ├── hurricane.png
 │   ├── earthquake.png
 │   ├── flood.png
 │   └── out_of_scope.png
-│
+|
 ├── src/
 │   ├── __init__.py
 │   ├── chunking.py
@@ -468,230 +336,258 @@ RESILIENCE-RAG-ASSISTANT/
 │   ├── openrouter_test.py
 │   ├── rag_pipeline.py
 │   └── retrieval.py
-│
-├── app.py
+|
+├── .gitignore
 ├── README.md
-├── requirements.txt
-└── .gitignore
-```
-
----
-
-# 🚀 Installation
-
-Clone the repository:
-
-```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+├── PROJECT_SUMMARY.md
+├── app.py
+└── requirements.txt
+Installation
+1. Clone the Repository
+git clone https://github.com/Nitheeshhd/resilience-rag-assistant.git
 cd resilience-rag-assistant
-```
+2. Create a Virtual Environment
 
-Create and activate a virtual environment:
+Windows:
 
-### Windows
-
-```powershell
 python -m venv venv
+
+Activate it:
+
 venv\Scripts\activate
-```
-
-Install the required packages:
-
-```powershell
+3. Install Dependencies
 pip install -r requirements.txt
-```
-
-Verify the installation:
-
-```powershell
+4. Verify Dependencies
 pip check
-```
 
-The expected result is:
+The expected output is:
 
-```text
 No broken requirements found.
-```
+Environment Variables
 
----
+Create a .env file in the project root:
 
-# 🔑 Environment Configuration
-
-Create a `.env` file in the project root.
-
-```env
 OPENROUTER_API_KEY=your_openrouter_api_key
-```
 
-Replace the value with your own OpenRouter API key.
+The .env file is intentionally excluded from Git using .gitignore.
 
-### ⚠️ Security
+Never commit or publicly expose your API key.
 
-The `.env` file must **not** be committed to GitHub.
-
-The repository `.gitignore` should contain:
-
-```text
-.env
-venv/
-__pycache__/
-*.pyc
-```
-
-Never expose the actual API key in:
-
-* Source code
-* README
-* Screenshots
-* GitHub
-* Project ZIP
-
----
-
-# ▶️ Running the Application
+Running the Application
 
 After activating the virtual environment and configuring the API key:
 
-```powershell
 streamlit run app.py
-```
 
-Streamlit will start the application locally.
+Streamlit will start the local web application.
 
-Open the displayed local URL in a browser.
+Open the local URL displayed in the terminal.
 
----
+Rebuilding the Vector Store
 
-# 🧪 Example Questions
+If the source documents are changed or new documents are added, rebuild the vector store using:
 
-### Hurricane
+python src/retrieval.py
 
-```text
+This process:
+
+Loads the PDF documents.
+Creates text chunks.
+Generates embeddings.
+Normalizes embeddings.
+Creates the FAISS index.
+Saves the index and chunk metadata.
+
+The generated files are:
+
+data/vector_store/disaster_guidelines.index
+data/vector_store/chunks.json
+Testing Retrieval
+
+The retrieval module can also be executed directly:
+
+python src/retrieval.py
+
+The script performs a test retrieval using:
+
 What should I do during a hurricane?
-```
 
-### Earthquake
+It displays:
 
-```text
-What should I do during an earthquake?
-```
+Retrieved result number
+Similarity score
+Source document
+Page number
+Retrieved text
+Evaluation
 
-### Flood
+The project includes an automated evaluation script:
 
-```text
-What should I do when there is a flood warning?
-```
+evaluation/run_evaluation.py
 
-### Out-of-Scope Test
+The evaluation contains 10 questions covering:
 
-```text
+Cyclone / Hurricane
+Earthquake
+Flood
+Out-of-scope questions
+
+Run the evaluation from the project root:
+
+python -m evaluation.run_evaluation
+
+The results are saved to:
+
+evaluation/evaluation_results.json
+
+The evaluation results contain:
+
+Question ID
+Category
+Question
+Generated answer
+Retrieved sources
+Page numbers
+Similarity scores
+Errors, if any
+
+The evaluation is intended to verify both supported disaster-management questions and out-of-scope behavior.
+
+Evaluation Example
+
+Example supported question:
+
+What should I do during a hurricane?
+
+The system retrieves relevant cyclone guidance and passes the retrieved content to the LLM.
+
+Example out-of-scope question:
+
 What is the capital of France?
-```
 
-The expected behavior for an out-of-scope question is:
+The system should return:
 
-```text
 The information is not available in the provided documents.
-```
+Screenshots
+Hurricane / Cyclone Question
 
----
+Earthquake Question
 
-# 📸 Screenshots
+Flood Question
 
-## Hurricane / Cyclone Question
+Out-of-Scope Question
 
-The system retrieves cyclone-related information and generates a grounded answer with source attribution.
+Grounding and Safety
 
-![Hurricane Result](screenshots/hurricane.png)
+This project is designed to keep answers grounded in the provided disaster-management documents.
 
----
+The system uses several mechanisms to reduce unsupported responses:
 
-## Earthquake Question
+Similarity Threshold
 
-The system retrieves earthquake-related information and displays the relevant PDF and similarity score.
+Retrieved chunks with similarity scores below:
 
-![Earthquake Result](screenshots/earthquake.png)
+0.30
 
----
+are excluded from the generation context.
 
-## Flood Question
+Restricted LLM Prompt
 
-The system retrieves flood-related information from the flood guideline document.
+The LLM is instructed to use only the retrieved document context.
 
-![Flood Result](screenshots/flood.png)
+Source Attribution
 
----
+The UI displays the source document, page number, and similarity score for retrieved content.
 
-## Out-of-Scope Question
+Safety Disclaimer
 
-The system does not provide an unsupported answer when the information cannot be found in the knowledge base.
+The application is intended as an information and demonstration tool.
 
-![Out-of-Scope Result](screenshots/out_of_scope.png)
+During an actual disaster, users should follow instructions from local emergency authorities and official emergency services.
 
----
+Challenges
+API Rate Limiting
 
-# ✅ Evaluation
+During evaluation, the OpenRouter free provider temporarily returned a 429 rate-limit response for one request.
 
-The system was tested with questions covering all three disaster categories:
+This represents an upstream provider limitation rather than a failure of the document loading, embedding, or FAISS retrieval components.
 
-| Category     | Test                                            | Result               |
-| ------------ | ----------------------------------------------- | -------------------- |
-| Hurricane    | What should I do during a hurricane?            | ✅ Relevant answer    |
-| Earthquake   | What should I do during an earthquake?          | ✅ Relevant answer    |
-| Flood        | What should I do when there is a flood warning? | ✅ Relevant answer    |
-| Out-of-scope | What is the capital of France?                  | ✅ Correctly rejected |
+Out-of-Scope Retrieval
 
-The application also displays retrieved source documents, page numbers, and similarity scores.
+Semantic retrieval may sometimes identify moderately similar text even when the exact answer is not present in the documents.
 
----
+The similarity threshold helps reduce the likelihood of unrelated content being passed to the LLM.
 
-# 🛡️ Safety and Grounding
+Grounded Generation
 
-This application is designed as a demonstration of document-grounded RAG.
+A language model can potentially generate information beyond the retrieved context.
 
-It answers questions using the provided disaster-management documents and should not replace instructions from emergency authorities during an actual disaster.
+The system prompt therefore explicitly restricts generation to the retrieved disaster-management documents.
 
-The application intentionally avoids providing unsupported information when relevant information cannot be found in the knowledge base.
+Project Documentation
 
----
+A detailed technical project summary is available in:
 
-# 🎯 Key Features
+PROJECT_SUMMARY.md
 
-* 📄 PDF-based knowledge base
-* ✂️ Text chunking
-* 🧠 Semantic sentence embeddings
-* 🔎 FAISS vector similarity search
-* 🎯 Similarity threshold filtering
-* 🤖 OpenRouter LLM integration
-* 📚 Source attribution
-* 📄 Page-level references
-* 🛡️ Out-of-scope question handling
-* 🖥️ Streamlit web interface
-* ⚡ Cached RAG assistant initialization
-* 🔐 Environment-variable API key management
+It explains:
 
----
+Project approach
+RAG architecture
+Technical decisions
+Embedding model
+FAISS implementation
+Similarity threshold
+Grounding strategy
+Streamlit interface
+Evaluation
+Challenges
+Results
+Future improvements
+Future Improvements
 
-# 🔮 Possible Future Improvements
+Possible future improvements include:
 
-Future versions could include:
+Expanding the disaster-management document collection.
+Adding a larger evaluation dataset.
+Adding automated answer-grounding metrics.
+Adding hybrid keyword and semantic retrieval.
+Adding a reranking stage.
+Supporting multiple languages.
+Adding document upload through the Streamlit interface.
+Adding conversation history.
+Improving source highlighting.
+Adding retry handling for temporary LLM API rate limits.
+Conclusion
 
-* Support for additional disaster types
-* More extensive evaluation datasets
-* Automatic document ingestion
-* Conversation history
-* Multilingual disaster guidance
-* Better retrieval ranking
-* Hybrid keyword + semantic search
-* Reranking models
-* Streaming LLM responses
-* Document upload through the UI
-* Automated evaluation metrics
+The Resilience RAG Assistant demonstrates an end-to-end Retrieval-Augmented Generation system for disaster-management question answering.
 
----
+The project combines:
 
-# 👨‍💻 Author
+PDF Processing
+      ↓
+Text Chunking
+      ↓
+Sentence Embeddings
+      ↓
+FAISS Vector Search
+      ↓
+Similarity Filtering
+      ↓
+Context Construction
+      ↓
+LLM Generation
+      ↓
+Source Attribution
+      ↓
+Streamlit Interface
 
-**Nitheesh H D**
+The system focuses on producing answers grounded in the provided cyclone, earthquake, and flood guideline documents while providing source transparency through document names, page numbers, and similarity scores.
 
-Built as a Retrieval-Augmented Generation project for disaster-management information retrieval and question answering.
+Author
+
+Nitheesh H D
+
+GitHub:
+
+https://github.com/Nitheeshhd/resilience-rag-assistant

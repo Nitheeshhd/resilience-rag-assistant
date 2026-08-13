@@ -1,0 +1,216 @@
+[
+  {
+    "id": 1,
+    "category": "Cyclone / Hurricane",
+    "question": "What should I do during a hurricane?",
+    "answer": "**During a hurricane, follow these steps:**\n\n1. **Get to a safe shelter**  \n   - Move indoors as soon as possible if you are outdoors, in a vehicle, a manufactured or mobile home, or a temporary structure.  \n   - Use a FEMA‑approved safe room, an ICC 500 storm shelter, or a small, interior windowless room in a sturdy building on the lowest level that will not be affected by floodwater.\n\n2. **Stay informed**  \n   - Pay attention to updates from weather stations and news sources.  \n   - Follow advice from local authorities and act when they advise you to do so.\n\n3. **Avoid floodwater**  \n   - Do not walk, swim, or drive through floodwaters.  \n   - Six inches of fast‑moving water can knock you down; one foot can sweep a vehicle away.  \n   - Stay away from floodwater after the storm; it may contain hazards such as sharp objects, downed power lines, sewage, bacteria, chemicals, and wild or stray animals.\n\n4. **Do not drive**  \n   - Wind gusts can overturn vehicles, and roads and bridges may collapse.\n\n5. **Use generators safely**  \n   - If you must use a generator, grill, or camp stove, do so only outdoors and at least 20 feet from any building openings (windows, doors, garages) to avoid carbon monoxide poisoning.\n\n6. **Conserve resources**  \n   - Conserve mobile‑device batteries for emergency use.  \n   - Keep in mind that phone systems may be down or busy after a disaster; use text messages or social media for communication.\n\n7. **Prepare an emergency plan**  \n   - Develop an emergency communication plan (prefer texting or messaging).  \n   - Create an evacuation plan based on your evacuation zone, including where you will go and how you will get there. Practice the route.\n\n8. **Gather supplies**  \n   - Stock enough food, water, and emergency supplies to last several days, including specific needs such as medication and pet supplies.\n\n9. **After the storm**  \n   - Follow re‑entry guidance from local authorities and return home only when it is safe.  \n   - Have a professional inspect damaged property before cleaning or repairing.  \n   - Wear protective clothing and use caution during cleanup.",
+    "sources": [
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7356985211372375
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7275259494781494
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7168008089065552
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Cyclone / Hurricane",
+    "question": "Where should I take shelter during a hurricane?",
+    "answer": "**Where to take shelter during a hurricane**\n\n- **If you are outside, in a vehicle, or in a temporary structure**  \n  - Get inside a safe shelter or a sturdy building as soon as possible.\n\n- **If you are inside a building and do not evacuate**  \n  - Stay indoors and keep away from windows and doors.  \n  - **No flooding:**  \n    - Choose a shelter on the lowest level that will not be affected by floodwater.  \n    - Ideal shelters:  \n      - FEMA safe room  \n      - International Code Council (ICC) 500 storm shelter  \n      - Small, interior windowless room in a sturdy building.  \n  - **Flooding present:**  \n    - Move to the highest level of the building to avoid rising floodwater.  \n    - Do **not** climb into a closed attic.",
+    "sources": [
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.731793999671936
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7293245196342468
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.6958250999450684
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "Cyclone / Hurricane",
+    "question": "What should I do after a hurricane?",
+    "answer": "**After a hurricane, follow these steps:**\n\n1. **Follow re‑entry guidance**  \n   - Return home only when local authorities say it is safe.\n\n2. **Inspect your property**  \n   - Have a professional examine any damage before you start cleaning or repairing.\n\n3. **Clean up safely**  \n   - Wear protective clothing.  \n   - Use caution when handling debris or damaged structures.\n\n4. **Avoid floodwater**  \n   - Stay away from water that may contain sharp objects, downed power lines, sewage, bacteria, chemicals, or stray animals.  \n   - Remember that even six inches of moving water can knock you down and one foot can sweep a vehicle away.\n\n5. **Conserve mobile device batteries**  \n   - Save battery power for emergency use.\n\n6. **Communicate wisely**  \n   - Save phone calls for emergencies; phone systems may be down or busy.  \n   - Use text messages or social media to reach family and friends.\n\n7. **Use generators or outdoor cooking safely**  \n   - If you need to use a generator, grill, or camp stove, keep it outdoors and at least 20 ft from any building openings to avoid carbon‑monoxide poisoning.",
+    "sources": [
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7267747521400452
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7161818146705627
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 2,
+        "score": 0.7059664726257324
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "Earthquake",
+    "question": "What should I do during an earthquake if I am indoors?",
+    "answer": "**If you are indoors during an earthquake, follow these steps:**\n\n1. **Drop, Cover, and Hold On**  \n   - Drop to the floor.  \n   - Cover your head and neck with your arms, a pillow, a book, or any available item.  \n   - Get under a sturdy piece of furniture (e.g., a table or desk) and hold on.\n\n2. **Stay away from hazards**  \n   - Move away from windows, mirrors, and other items that could fall.  \n   - Avoid standing near heavy objects that could topple.\n\n3. **If you cannot drop, cover, and hold on**  \n   - Get as low as possible.  \n   - Move away from windows or other falling objects.  \n   - Do **not** try to transfer from a wheelchair, recliner, or bed during shaking.  \n   - If you use a wheelchair, lock the wheels and remain seated until the shaking stops.\n\n4. **Protect your head and neck**  \n   - Use your arms, a pillow, a book, or any available item to shield your head and neck throughout the shaking.",
+    "sources": [
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 4,
+        "score": 0.7267380952835083
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 2,
+        "score": 0.7264916896820068
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 4,
+        "score": 0.710408091545105
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "category": "Earthquake",
+    "question": "What should I do if I am outside during an earthquake?",
+    "answer": "If you are outside when an earthquake starts, follow these steps:\n\n- **Move away from hazards** – Quickly walk away from buildings, streetlights, and power lines.  \n- **Stay in a vehicle if you’re in one** – If you’re driving or riding in a car, remain inside the vehicle until the shaking stops.  \n\nThese actions help keep you clear of falling debris and other dangers that can occur during an earthquake.",
+    "sources": [
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 4,
+        "score": 0.7448421120643616
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 4,
+        "score": 0.7441320419311523
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 2,
+        "score": 0.7177561521530151
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "category": "Earthquake",
+    "question": "What should I do after an earthquake?",
+    "answer": "**After an earthquake, follow these steps:**\n\n1. **Avoid entering damaged structures** – Do not go inside a building that shows signs of damage.  \n2. **Open cabinets carefully** – Objects may have shifted and could fall on you.  \n3. **Protect yourself from broken items** – Wear long pants, long sleeves, and shoes to shield your skin from scratches or cuts.  \n4. **Communicate safely** – Text emergency services instead of talking to keep phone lines available for responders; texting may still work if cell service is down.  \n5. **If trapped under debris** – Do not yell for help; cover your mouth with a shirt and tap on a pipe or wall so rescuers can locate you.",
+    "sources": [
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 4,
+        "score": 0.7386855483055115
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 2,
+        "score": 0.7157647609710693
+      },
+      {
+        "source": "earthquake_guidelines.pdf",
+        "page": 9,
+        "score": 0.6735777854919434
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "category": "Flood",
+    "question": "What should I do when there is a flood warning?",
+    "answer": "When a flood warning is issued, follow these steps:\n\n1. **Listen for official instructions**  \n   - Sign up to receive emergency alerts from your local emergency management office.  \n   - Follow any instructions issued by local officials.\n\n2. **Avoid dangerous water**  \n   - Stay off bridges over fast‑moving water; they can be swept away without warning.  \n   - Do not walk, swim, or drive through floodwaters.\n\n3. **Move to higher ground**  \n   - If you are in a low‑lying area, move to a higher floor or a higher‑elevation location to stay above rising water.  \n   - Do not become trapped in a basement or attic.\n\n4. **Prepare for evacuation or shelter‑in‑place**  \n   - Have an evacuation plan ready.  \n   - If evacuation is not possible, be prepared to shelter in place safely.\n\n5. **Stay connected**  \n   - Keep a communication plan in place (e.g., texting or messaging) in case phone calls are unavailable.  \n\nThese actions are based on the flood‑guidelines document provided.",
+    "sources": [
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 2,
+        "score": 0.6711257100105286
+      },
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 2,
+        "score": 0.668281078338623
+      },
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 1,
+        "score": 0.6590620875358582
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "category": "Flood",
+    "question": "How can I stay safe around floodwater?",
+    "answer": "**How to stay safe around floodwater**\n\n- **Stay off bridges over fast‑moving water** – they can be swept away without warning.  \n- **Do not walk, swim, or drive through floodwaters** – even a foot of moving water can sweep a vehicle or person away.  \n- **Avoid driving into underground roads or tunnels** during a flood.  \n- **Do not drive around barriers blocking a flooded road** – the road may be damaged or unsafe.  \n- **Move to higher ground or a higher floor** to stay above rising water; avoid basements or attics where you could become trapped.  \n- **Sign up for emergency alerts** and follow instructions from local officials.  \n- **Plan an evacuation route** and have a communication plan (e.g., texting) in case phone calls are unavailable.  \n- **After evacuation, return home only when local officials say it is safe** and follow their guidance.  \n- **Do not assume your drinking water is safe** after a flood.  \n\nThese steps are drawn directly from the flood‑guidelines documents.",
+    "sources": [
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 1,
+        "score": 0.723167896270752
+      },
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 2,
+        "score": 0.6968161463737488
+      },
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 2,
+        "score": 0.6717267632484436
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "category": "Flood",
+    "question": "What should I do after a flood?",
+    "answer": "**After a flood, take the following steps:**\n\n1. **Ensure personal safety first**  \n   - Move to higher ground or a higher floor to stay above rising floodwaters.  \n   - Avoid basements or attics where you could become trapped.  \n   - Stay 20 feet away from building openings (windows, doors, garages) to reduce the risk of carbon‑monoxide poisoning.\n\n2. **Prepare for cleanup**  \n   - Hire a qualified flood adjuster before attempting to clean up debris or repair property damage.  \n   - Wear protective gear (gloves, masks, boots) when cleaning up flood debris.\n\n3. **Document damage**  \n   - Take photographs of all damaged areas and items for insurance records.\n\n4. **File insurance claims**  \n   - Contact your flood insurer to file a flood insurance claim.  \n   - Standard insurance policies do not cover flooding; ensure you have flood coverage under the National Flood Insurance Program.\n\n5. **Seek additional assistance**  \n   - Register with FEMA for potential assistance.  \n   - Visit Ready.gov/floods and download the FEMA app for more information on preparation and recovery.\n\nThese steps are drawn directly from the flood guidelines provided.",
+    "sources": [
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 1,
+        "score": 0.6800076365470886
+      },
+      {
+        "source": "flood_guidelines.pdf",
+        "page": 2,
+        "score": 0.6717211008071899
+      },
+      {
+        "source": "cyclone_guidelines.pdf",
+        "page": 1,
+        "score": 0.6482304334640503
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "category": "Out-of-Scope",
+    "question": "What is the capital of France?",
+    "answer": "The information is not available in the provided documents.",
+    "sources": []
+  }
+]
